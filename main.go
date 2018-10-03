@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 )
 
 func check(e error) {
@@ -39,6 +40,7 @@ func main() {
 		if _, err = bashRcFile.WriteString(writeToBashRc); err != nil {
 			panic(err)
 		}
+		exec.Command("/bin/bash", "-c", ln)
 
 	} else {
 		println("Incorrect Arguments. Use as bashAliasCreator alias \"command\"  ")
