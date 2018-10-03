@@ -22,4 +22,4 @@ Easily create aliases for bash shells.
 
 **Example:** To create a alias for `ls -la` as `la` run `bashAliasCreator ls "ls -la"`
 
-Restart your shell to start using your alias.
+Start using your alias.
