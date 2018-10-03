@@ -1,9 +1,11 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func check(e error) {
@@ -12,9 +14,29 @@ func check(e error) {
 	}
 }
 
+func getRcFilePath() (string, error) {
+	shell := os.Getenv("SHELL")
+
+	switch {
+	case strings.Contains(shell, "bash"):
+		return "/.bashrc", nil
+	case strings.Contains(shell, "zsh"):
+		return "/.zshrc", nil
+	default:
+		var errMsg = fmt.Sprintf("Unsupported shell %s", shell)
+		return "", errors.New(errMsg)
+	}
+}
+
 func main() {
 
 	args := os.Args[1:]
+
+	rcFilePath, err := getRcFilePath()
+
+	if err != nil {
+		panic(err)
+	}
 
 	if len(args) >= 2 {
 
@@ -26,7 +48,7 @@ func main() {
 
 		home := os.Getenv("HOME")
 
-		bashRcFileLocation := home + "/.bashrc"
+		bashRcFileLocation := home + rcFilePath
 
 		bashRcFile, err := os.OpenFile(bashRcFileLocation, os.O_APPEND|os.O_WRONLY, 0644)
 		check(err)
