@@ -22,7 +22,7 @@ func main() {
 		cmd := args[1]
 
 		ln := "alias " + alias + "='" + cmd + "' "
-		println("append: " + ln)
+		println(ln)
 
 		home := os.Getenv("HOME")
 
