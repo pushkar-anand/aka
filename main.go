@@ -25,7 +25,6 @@ func main() {
 		println("append: " + ln)
 
 		home := os.Getenv("HOME")
-		println("HOME: " + home)
 
 		bashRcFileLocation := home + "/.bashrc"
 
