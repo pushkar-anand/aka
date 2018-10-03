@@ -21,6 +21,6 @@ bashAliasCreator does that for you in just one line.
 
 `$ bashAliasCreator alias command`
 
-**Example:** To create a alias for `ls -la` as `la` run `bashAliasCreator ls "ls -la"`
+**Example:** To create a alias for `ls -la` as `la` run `bashAliasCreator la "ls -la"`
 
 Start using your alias.
