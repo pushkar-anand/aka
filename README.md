@@ -5,7 +5,7 @@ bashAliasCreator does that for you in just one line.
 
 ## Installation
 
-1. Make sure go is installed. 
+1. Make sure go is installed. If not [install go](https://golang.org/doc/install) first.
     
     `$ go  version`
 
