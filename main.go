@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 )
 
@@ -30,14 +29,10 @@ func getRcFilePath() (string, error) {
 
 func main() {
 
-	args := os.Args[1:]
-
 	rcFilePath, err := getRcFilePath()
+	check(err)
 
-	if err != nil {
-		panic(err)
-	}
-
+	args := os.Args[1:]
 	if len(args) >= 2 {
 
 		alias := args[0]
@@ -52,16 +47,13 @@ func main() {
 
 		rcFile, err := os.OpenFile(rcFileLocation, os.O_APPEND|os.O_WRONLY, 0644)
 		check(err)
-
 		defer rcFile.Close()
 
 		writeToRc := "#ADDED BY bashAliasCreator \n" + ln + "\n"
-		fmt.Println(writeToRc)
 
 		if _, err = rcFile.WriteString(writeToRc); err != nil {
 			panic(err)
 		}
-		exec.Command("/bin/bash", "-c", ln)
 
 	} else {
 		println("Incorrect Arguments. Use as bashAliasCreator alias \"command\"  ")
