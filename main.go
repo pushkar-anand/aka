@@ -50,15 +50,15 @@ func main() {
 
 		rcFileLocation := home + rcFilePath
 
-		bashRcFile, err := os.OpenFile(rcFileLocation, os.O_APPEND|os.O_WRONLY, 0644)
+		rcFile, err := os.OpenFile(rcFileLocation, os.O_APPEND|os.O_WRONLY, 0644)
 		check(err)
 
-		defer bashRcFile.Close()
+		defer rcFile.Close()
 
-		writeToBashRc := "#ADDED BY bashAliasCreator \n" + ln + "\n"
-		fmt.Println(writeToBashRc)
+		writeToRc := "#ADDED BY bashAliasCreator \n" + ln + "\n"
+		fmt.Println(writeToRc)
 
-		if _, err = bashRcFile.WriteString(writeToBashRc); err != nil {
+		if _, err = rcFile.WriteString(writeToRc); err != nil {
 			panic(err)
 		}
 		exec.Command("/bin/bash", "-c", ln)
