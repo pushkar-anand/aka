@@ -1,6 +1,6 @@
 # bashAliasCreator
 
-Easily create aliases for bash shells. No need to edit your .bashrc every time to add an alias.
+Easily create aliases for bash/zsh shells. No need to edit your .bashrc/.zshrc every time to add an alias.
 bashAliasCreator does that for you in just one line.
 
 ## Installation

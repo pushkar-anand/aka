@@ -48,9 +48,9 @@ func main() {
 
 		home := os.Getenv("HOME")
 
-		bashRcFileLocation := home + rcFilePath
+		rcFileLocation := home + rcFilePath
 
-		bashRcFile, err := os.OpenFile(bashRcFileLocation, os.O_APPEND|os.O_WRONLY, 0644)
+		bashRcFile, err := os.OpenFile(rcFileLocation, os.O_APPEND|os.O_WRONLY, 0644)
 		check(err)
 
 		defer bashRcFile.Close()
