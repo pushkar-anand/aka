@@ -21,6 +21,10 @@ func getRcFilePath() (string, error) {
 		return "/.bashrc", nil
 	case strings.Contains(shell, "zsh"):
 		return "/.zshrc", nil
+	case strings.Contains(shell, "tcsh"):
+		return "/.tcshrc", nil
+	case strings.Contains(shell, "ksh"):
+		return "/.kshrc", nil
 	default:
 		var errMsg = fmt.Sprintf("Unsupported shell %s", shell)
 		return "", errors.New(errMsg)
