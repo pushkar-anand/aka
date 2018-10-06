@@ -1,7 +1,13 @@
 # bashAliasCreator
 
-Easily create aliases for bash/zsh shells. No need to edit your .bashrc/.zshrc every time to add an alias.
+Easily create aliases for linux shells. No need to edit your shell startup scripts every time to add an alias.
 bashAliasCreator does that for you in just one line.
+
+### Supported Shells
+- BASH
+- ZSH
+- TCSH
+- KSH
 
 ## Installation
 
