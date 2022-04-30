@@ -1,4 +1,4 @@
-# bashAliasCreator
+# aka
 
 Easily create aliases for linux shells. No need to edit your shell startup scripts every time to add an alias.
 bashAliasCreator does that for you in just one line.
