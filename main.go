@@ -14,6 +14,7 @@ func init() {
 	flag.Usage = usage
 
 	flag.StringVar(&rcFilePath, "rcfile", "", "Path to the rc file")
+	flag.StringVar(&rcFilePath, "f", "", "Path to the rc file")
 	flag.Parse()
 }
 
@@ -49,7 +50,7 @@ func usage() {
 aka is a tool for managing aliases in the shell.
 
 Usage:
-  aka [--rcfile file] [ alias ] [ command ]
+  aka [--rcfile file] <alias> <command>
 
 Options:
 	-f, --rcfile		Shell configuration file to modify. Defaults to the shell's default configuration file.
