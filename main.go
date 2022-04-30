@@ -1,66 +1,57 @@
 package main
 
 import (
-	"errors"
+	"flag"
 	"fmt"
 	"os"
-	"strings"
+
+	"github.com/pushkar-anand/aka/shell"
 )
 
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
+var rcFilePath = ""
 
-func getRcFilePath() (string, error) {
-	shell := os.Getenv("SHELL")
+func init() {
+	flag.Usage = usage
 
-	switch {
-	case strings.Contains(shell, "bash"):
-		return "/.bashrc", nil
-	case strings.Contains(shell, "zsh"):
-		return "/.zshrc", nil
-	case strings.Contains(shell, "tcsh"):
-		return "/.tcshrc", nil
-	case strings.Contains(shell, "ksh"):
-		return "/.kshrc", nil
-	default:
-		var errMsg = fmt.Sprintf("Unsupported shell %s", shell)
-		return "", errors.New(errMsg)
-	}
+	flag.StringVar(&rcFilePath, "rcfile", "", "Path to the rc file")
+	flag.Parse()
 }
 
 func main() {
+	alias := flag.Arg(0)
+	cmd := flag.Arg(1)
 
-	rcFilePath, err := getRcFilePath()
-	check(err)
-
-	args := os.Args[1:]
-	if len(args) >= 2 {
-
-		alias := args[0]
-		cmd := args[1]
-
-		ln := "alias " + alias + "='" + cmd + "' "
-		println(ln)
-
-		home := os.Getenv("HOME")
-
-		rcFileLocation := home + rcFilePath
-
-		rcFile, err := os.OpenFile(rcFileLocation, os.O_APPEND|os.O_WRONLY, 0644)
-		check(err)
-		defer rcFile.Close()
-
-		writeToRc := "#ADDED BY bashAliasCreator \n" + ln + "\n"
-
-		if _, err = rcFile.WriteString(writeToRc); err != nil {
-			panic(err)
-		}
-
-	} else {
-		println("Incorrect Arguments. Use as bashAliasCreator alias \"command\"  ")
+	if alias == "" || cmd == "" {
+		fmt.Println("Usage: aka [--rcfile file] <alias> <command>")
+		os.Exit(1)
 	}
 
+	var err error
+
+	if rcFilePath == "" {
+		rcFilePath, err = shell.DefaultRC()
+		exitOnError(err)
+	}
+
+	err = shell.AddAlias(rcFilePath, alias, cmd)
+	exitOnError(err)
+}
+
+func exitOnError(err error) {
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
+
+func usage() {
+	fmt.Print(`
+aka is a tool for managing aliases in the shell.
+
+Usage:
+  aka [--rcfile file] [ alias ] [ command ]
+
+Options:
+	-f, --rcfile		Shell configuration file to modify. Defaults to the shell's default configuration file.
+`)
 }
