@@ -1,9 +1,25 @@
 # aka
 
 Easily create aliases for linux shells. No need to edit your shell startup scripts every time to add an alias.
-bashAliasCreator does that for you in just one line.
+aka does that for you in just one line.
+
+## Table of Contents
+
+- [Usage](#usage)
+- [Supported Shells](#supported-shells)
+- [Installation](#installation)
+
+## Usage
+
+```shell
+aka [--rcfile file] <alias> <command>
+
+Options:
+	-f, --rcfile		Shell configuration file to modify. Defaults to the shell's default configuration file.
+```
 
 ### Supported Shells
+
 - BASH
 - ZSH
 - TCSH
@@ -11,22 +27,15 @@ bashAliasCreator does that for you in just one line.
 
 ## Installation
 
-1. Make sure go is installed. If not [install go](https://golang.org/doc/install) first.
-    
-    `$ go  version`
+### Download pre-built binary (Linux or macOS)
 
-2. Get the source
-    
-    `$ go get github.com/pushkar-anand/bashAliasCreator`
-    
-3. Install 
+[Release Downloads](https://github.com/pushkar-anand/aka/releases)
 
-    `$ go install github.com/pushkar-anand/bashAliasCreator`
-    
-## Usage
+### With Go toolchain
 
-`$ bashAliasCreator alias command`
-
-**Example:** To create a alias for `ls -la` as `la` run `bashAliasCreator la "ls -la"`
-
-Start using your alias.
+```shell
+$ # Go 1.15 and below
+$ go get -u github.com/pushkar-anand/aka
+$ # Go 1.16+
+$ go install github.com/pushkar-anand/aka@latest
+```
