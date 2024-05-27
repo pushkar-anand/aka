@@ -1,3 +1,3 @@
 module github.com/pushkar-anand/aka
 
-go 1.20
+go 1.22
